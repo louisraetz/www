@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { globalStyles } from '~designSystem/theme'
+import Shell from '~designSystem/components/Shell'
+import { ShellProvider } from '~lib/shellContext'
 
 const App = () => {
   globalStyles()
@@ -15,14 +17,16 @@ const App = () => {
       }
 
       document.title = title
-    }, 500)
+    }, 350)
 
     return () => clearInterval(interval)
   }, [])
 
   return (
     <div className="App">
-      <h1>Vite + React</h1>
+      <ShellProvider>
+        <Shell />
+      </ShellProvider>
     </div>
   )
 }

@@ -1,8 +1,8 @@
-import { createStitches } from '@stitches/react'
-import colors from '~designSystem/constants'
+import * as Stitches from '@stitches/react'
+import { colors } from '~designSystem/constants'
 
 const { styled, css, globalCss, keyframes, getCssText, theme, config } =
-  createStitches({
+  Stitches.createStitches({
     theme: {
       colors,
     },
@@ -29,20 +29,6 @@ const globalStyles = globalCss({
     margin: 0,
 
     boxSizing: 'border-box',
-
-    /* ===== Scrollbar CSS ===== */
-    /* Firefox */
-    scrollbarWidth: 'auto',
-    scrollbarColor: 'red transparent',
-
-    '&:-webkit-autofill': {
-      '-webkit-transition-delay': '9999s',
-      'transition-delay': '9999s',
-    },
-
-    '&:autofill': {
-      background: 'transparent',
-    },
   },
   html: {
     height: '100%',
@@ -62,7 +48,7 @@ const globalStyles = globalCss({
   },
   '#root': {
     colorScheme: 'light dark',
-    color: theme.colors.TERMINAL_LABEL_ACTIVE_COLOR,
+    color: theme.colors.TERMINAL_LABEL_DEFAULT_COLOR,
     fontFamily: 'Meslo',
     fontWeight: '400',
     fontSize: '11px',
@@ -71,9 +57,36 @@ const globalStyles = globalCss({
     fontFeatureSettings: '"tnum", "tnum"',
     height: '100%',
 
+    backgroundImage: 'url(/images/background.jpg)',
+    backgroundSize: 'cover',
+
     '-webkit-font-smoothing': 'antialiased',
     '-moz-osx-font-smoothing': 'grayscale',
   },
 })
 
-export { styled, css, globalStyles, keyframes, getCssText, theme, config }
+const mapTokenScaleToVariant = <
+  Scale extends object,
+  Token extends keyof Scale,
+  Output,
+>(
+  tokenSet: Scale,
+  map: (arg0: Token) => Output,
+): Record<Token, Output> => {
+  const keys = Object.keys(tokenSet) as Token[]
+  return keys.reduce(
+    (acc, token) => ({ ...acc, [token]: map(token) }),
+    {} as Record<Token, Output>,
+  )
+}
+
+export {
+  styled,
+  css,
+  globalStyles,
+  keyframes,
+  getCssText,
+  theme,
+  config,
+  mapTokenScaleToVariant,
+}
