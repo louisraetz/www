@@ -38,14 +38,6 @@ const ShellBody = styled('div', {
   height: 'calc(100% - 16px)',
 
   margin: '8px',
-})
-
-const ShellWrapper = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-
-  minHeight: '100%',
-  height: '100%',
 
   '.binary': {
     fontWeight: '600',

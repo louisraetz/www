@@ -14,7 +14,7 @@ import Flex from '~designSystem/components/Flex'
 import { ReactComponent as ShellPrefix } from '~designSystem/svg/ShellPrefix.svg'
 import { theme } from '~designSystem/theme'
 import useShell from '~lib/shellContext'
-import { mockFiles } from '~lib/commands'
+import { destructureCommand, mockFiles } from '~lib/commands'
 
 const CMDInput = styled('span', {
   caretColor: theme.colors.TERMINAL_BACKGROUND,
@@ -67,6 +67,7 @@ const ShellInput = () => {
   function handleKeyPress(e: KeyboardEvent<HTMLInputElement>) {
     const { key, target } = e
     const val = (target as HTMLInputElement).value
+    const { cmd, text } = destructureCommand(val)
 
     if (key === 'Tab' && matches.length === 0) {
       const options = {
@@ -76,9 +77,11 @@ const ShellInput = () => {
         keys: [],
       }
 
-      const fuse = new Fuse(mockFiles, options)
-      const possibleMatches = fuse.search(val)
-      setMatches(possibleMatches.map(fs => fs.item))
+      if (text) {
+        const fuse = new Fuse(mockFiles, options)
+        const possibleMatches = fuse.search(text)
+        setMatches(possibleMatches.map(fs => fs.item))
+      }
     } else if (key === 'Tab' && matches.length > 0) {
       setMatchCounter(p => {
         if (p === matches.length - 1) {
@@ -86,7 +89,7 @@ const ShellInput = () => {
           return 0
         }
 
-        setValue(matches[p + 1])
+        setValue(`${cmd} ${matches[p + 1]}`)
         return p + 1
       })
     }
