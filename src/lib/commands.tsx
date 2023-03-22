@@ -23,12 +23,14 @@ const commandList: { [key: string | Commands]: CommandProperties } = {
   [Commands.LS]: {
     command: 'ls',
     description:
-      'ls lists files and directories, and their associated metadata, such as file size, ownership, and modification time. With no options, ls lists the files contained in the current directory, sorting them alphabetically.',
+      'ls lists files and directories, and their associated metadata, such as file size, ownership, and modification time.',
     return: () => `total 5
-${mockFiles.map(
-  file =>
-    `-rw-r--r--@  1 louisraetz  staff     320 21 Jan 12:13 <span class='binary'>${file}</span>\n`,
-)}
+${mockFiles
+  .map(
+    file =>
+      `-rw-r--r--@  1 louisraetz  staff     320 21 Jan 12:13 <span class='binary'>${file}</span>\n`,
+  )
+  .join('')}
     `,
   },
   [Commands.CLEAR]: {
@@ -59,9 +61,9 @@ ${mockFiles.map(
 \n
 Version 1.0
 Available commands:\n
-${Object.entries(commandList).map(
-  ([command, cmdP]) => `${command} - ${cmdP.description}\n`,
-)}
+${Object.entries(commandList)
+  .map(([command, cmdP]) => `${command} - ${cmdP.description}\n`)
+  .join('')}
 `.replaceAll(' ', '\u00A0'),
   },
 }

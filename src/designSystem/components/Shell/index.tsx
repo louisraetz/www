@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { styled, theme } from '~designSystem/theme'
 import ShellHeader from '~designSystem/components/Shell/ShellHeader'
 import ShellInput from '~designSystem/components/Shell/ShellInput'
@@ -25,7 +25,7 @@ const ShellContainer = styled('div', {
 
 const ShellBody = styled('div', {
   display: 'flex',
-  flexDirection: 'column-reverse',
+  flexDirection: 'column',
 
   overflow: 'overlay',
 
@@ -57,6 +57,18 @@ const Shell = () => {
   const { log } = useShell()
   const shellRef = useRef<HTMLDivElement | null>(null)
   const shellHeaderRef = useRef<HTMLDivElement | null>(null)
+  const shellBodyRef = useRef<HTMLDivElement | null>(null)
+
+  /*
+   * Prefer js here instead of row reversing the layout with css which causes
+   * some headaches
+   * */
+  useEffect(() => {
+    const el = shellBodyRef.current
+    if (el) {
+      el.scrollTop = el.scrollHeight
+    }
+  }, [log])
 
   /* function handleMove(e: MouseEvent<HTMLDivElement>) {
     const el = e.target as HTMLDivElement
@@ -77,25 +89,24 @@ const Shell = () => {
     >
       <ShellHeader ref={shellHeaderRef} />
       <ShellBody
+        ref={shellBodyRef}
         css={{
           height: `calc(100% - ${
             (shellHeaderRef.current?.getBoundingClientRect().height || 20) + 16
           }px)`,
         }}
       >
-        <ShellWrapper>
-          {log.map(({ input, output }) => (
-            <>
-              {input && <ShellLn>{input}</ShellLn>}
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: output.replaceAll('\n', '<br />'),
-                }}
-              />
-            </>
-          ))}
-          <ShellInput />
-        </ShellWrapper>
+        {log.map(({ input, output }) => (
+          <>
+            {input && <ShellLn>{input}</ShellLn>}
+            <p
+              dangerouslySetInnerHTML={{
+                __html: output.replaceAll('\n', '<br />'),
+              }}
+            />
+          </>
+        ))}
+        <ShellInput />
       </ShellBody>
     </ShellContainer>
   )

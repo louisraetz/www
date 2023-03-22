@@ -88,12 +88,11 @@ export const ShellProvider: React.FC<{ children: React.ReactElement }> = ({
     dispatch({
       type: ShellAction.SEND_CMD,
       payload: {
-        input: undefined,
-        output: `zsh: command not found: ${cmd}`,
+        input: cmd === '' ? '\u00A0' : undefined,
+        output: cmd === '' ? '' : `zsh: command not found: ${cmd}`,
       },
     })
   }
-
   return (
     <ShellContext.Provider
       value={{
