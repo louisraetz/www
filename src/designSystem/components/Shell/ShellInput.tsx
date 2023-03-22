@@ -1,15 +1,8 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import React, {
-  useState,
-  FocusEvent,
-  KeyboardEvent,
-  useRef,
-  useEffect,
-} from 'react'
+import React, { useState, KeyboardEvent, useRef, useEffect } from 'react'
 import { styled } from '@stitches/react'
 import Fuse from 'fuse.js'
-import FocusTrap from 'focus-trap-react'
 import Flex from '~designSystem/components/Flex'
 import { ReactComponent as ShellPrefix } from '~designSystem/svg/ShellPrefix.svg'
 import { theme } from '~designSystem/theme'
@@ -21,8 +14,6 @@ const CMDInput = styled('span', {
   backgroundColor: theme.colors.TERMINAL_BACKGROUND,
   border: 'none',
   outline: 'none',
-
-  '&::selection': { background: 'red' },
 
   color: theme.colors.TERMINAL_CURSOR_COLOR,
   width: 'fit-content',
@@ -141,18 +132,13 @@ const ShellInput = () => {
           <CMDCursor>█</CMDCursor>
         </Flex>
 
-        <FocusTrap>
-          <div>
-            <CMDGhostInput
-              ref={inputRef}
-              onKeyDown={handleKeyPress}
-              autoFocus
-              value={value}
-              onChange={e => setValue(e.target.value)}
-              onBlur={(e: FocusEvent<HTMLInputElement>) => e.target.focus()}
-            />
-          </div>
-        </FocusTrap>
+        <CMDGhostInput
+          ref={inputRef}
+          onKeyDown={handleKeyPress}
+          autoFocus
+          value={value}
+          onChange={e => setValue(e.target.value)}
+        />
       </Flex>
       <Flex gap="2">
         {matches.length > 0 &&

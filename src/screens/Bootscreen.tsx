@@ -1,8 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import FocusTrap from 'focus-trap-react'
 import { styled } from '~designSystem/theme'
-import Flex from '~designSystem/components/Flex'
 import { Theme } from '~App'
+import Flex from '~designSystem/components/Flex'
 
 const Container = styled(Flex, {
   width: '100%',
@@ -80,20 +79,18 @@ const Bootscreen: React.FC<{
         <WrapperHead align="center" justify="center">
           <h1>BOOTLOADER: PLEASE CHOOSE OS</h1>
         </WrapperHead>
-        <FocusTrap>
-          <ul>
-            <BootItem
-              tabIndex={1}
-              theme={Theme.LINUX}
-              onClick={() => setTheme(Theme.LINUX)}
-            />
-            <BootItem
-              tabIndex={0}
-              theme={Theme.MAC}
-              onClick={() => setTheme(Theme.MAC)}
-            />
-          </ul>
-        </FocusTrap>
+        <ul>
+          <BootItem
+            tabIndex={1}
+            theme={Theme.LINUX}
+            onClick={() => setTheme(Theme.LINUX)}
+          />
+          <BootItem
+            tabIndex={0}
+            theme={Theme.MAC}
+            onClick={() => setTheme(Theme.MAC)}
+          />
+        </ul>
       </Wrapper>
     </Container>
   )

@@ -104,7 +104,7 @@ const globalStyles = globalCss({
   'input, button, textarea, select': {
     font: 'inherit',
   },
-  'p, h1, h2, h3, h4, h5, h6': {
+  'p, h1, h2, h3, h4, h5, h6, span': {
     overflowWrap: 'break-word',
   },
   '#root': {

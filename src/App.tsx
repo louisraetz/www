@@ -33,7 +33,17 @@ const App = () => {
   globalStyles()
 
   useEffect(() => {
-    /* TODO: Add functionality later to track command which got entered into the shell */
+    // eslint-disable-next-line consistent-return
+    function evt(e: KeyboardEvent) {
+      // disables tab going to search bar
+      if (e.keyCode === 9) {
+        e.preventDefault()
+        return false
+      }
+    }
+
+    document.addEventListener('keydown', evt)
+
     let title = 'louisraetz@macbook:~ ▌'
     const interval = setInterval(() => {
       if (title.length === 22) {
@@ -68,7 +78,10 @@ const App = () => {
 
     cacheImages(imgs)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      document.removeEventListener('keydown', evt)
+    }
   }, [])
 
   return (

@@ -50,6 +50,10 @@ const ShellBody = styled('div', {
     fontWeight: '600',
     color: theme.colors.TERMINAL_LABEL_TREE_COLOR,
   },
+
+  '.social-link': {
+    color: theme.colors.TERMINAL_LABEL_ACTIVE_COLOR,
+  },
 })
 
 const Shell: React.FC<{ t: Theme }> = ({ t }) => {

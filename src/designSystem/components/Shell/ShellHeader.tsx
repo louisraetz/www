@@ -98,9 +98,7 @@ const ShellHeader = forwardRef(function ShellHeaderWithRef(
         <div style={{ width: 78 }} />
       )}
 
-      <p
-        style={{ marginRight: 'auto', marginLeft: 'auto', userSelect: 'none' }}
-      >
+      <p style={{ marginRight: 'auto', marginLeft: 'auto' }}>
         louisraetz@macbook:~
       </p>
       {_props.t === Theme.LINUX ? (

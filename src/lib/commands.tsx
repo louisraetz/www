@@ -4,6 +4,7 @@ export enum Commands {
   LS = 'ls',
   CLEAR = 'clear',
   WELCOME = 'welcome',
+  SOCIAL = 'social',
 }
 
 type CommandProperties = {
@@ -86,6 +87,13 @@ and binge-watching coding related YouTube videos.
 
 To list all available commands type "help".
     `.replaceAll(' ', '\u00A0'),
+  },
+  [Commands.SOCIAL]: {
+    command: 'social',
+    description: 'Usage: social -  lists all my social media appearance',
+    return: () => `Social Media
+    LinkedIn: <a class='social-link' href='https://www.linkedin.com/in/louis-raetz-371614178/' target="_blank">https://www.linkedin.com/in/louis-raetz-371614178/</a>
+    `,
   },
 }
 
