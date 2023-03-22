@@ -55,11 +55,11 @@ const ShellInput = () => {
   const [value, setValue] = useState('')
   const [memoryCounter, setMemoryCounter] = useState<number>(0)
   const [matches, setMatches] = useState<string[]>([])
-  const [matchCounter, setMatchCounter] = useState<number>(0)
+  const [matchCounter, setMatchCounter] = useState<number>(-1)
 
   useEffect(() => {
     if (value.length === 0) {
-      setMatchCounter(0)
+      setMatchCounter(-1)
       setMatches([])
     }
   }, [value])
@@ -68,26 +68,27 @@ const ShellInput = () => {
     const { key, target } = e
     const val = (target as HTMLInputElement).value
 
-    if (key === 'Tab' && val.length > 0) {
+    if (key === 'Tab' && matches.length === 0) {
       const options = {
         isCaseSensitive: false,
+        minMatchCharLength: 2,
+        threshold: 0.4,
         keys: [],
       }
 
       const fuse = new Fuse(mockFiles, options)
       const possibleMatches = fuse.search(val)
-      setMatches(possibleMatches.map(fuseMatch => fuseMatch.item))
-      if (possibleMatches[matchCounter].item != null) {
-        if (val !== possibleMatches[matchCounter].item) {
-          setValue(possibleMatches[matchCounter].item)
-          setMatchCounter(p => {
-            if (p === possibleMatches.length - 1) {
-              return 0
-            }
-            return p + 1
-          })
+      setMatches(possibleMatches.map(fs => fs.item))
+    } else if (key === 'Tab' && matches.length > 0) {
+      setMatchCounter(p => {
+        if (p === matches.length - 1) {
+          setValue(matches[0])
+          return 0
         }
-      }
+
+        setValue(matches[p + 1])
+        return p + 1
+      })
     }
 
     if (key === 'ArrowUp') {
@@ -107,39 +108,45 @@ const ShellInput = () => {
   }
 
   return (
-    <FocusTrap active>
-      <Flex direction="column">
-        <Flex
-          align="center"
-          justify="start"
-          gap="2"
-          css={{ color: theme.colors.TERMINAL_CHEVRON_ACTIVE }}
-        >
-          <ShellPrefix />
-          <Flex align="center" justify="start">
-            <CMDInput>{value.replaceAll(' ', '\u00A0')}</CMDInput>
-            <CMDCursor>█</CMDCursor>
-          </Flex>
+    <Flex direction="column">
+      <Flex
+        align="center"
+        justify="start"
+        gap="2"
+        css={{ color: theme.colors.TERMINAL_CHEVRON_ACTIVE }}
+      >
+        <ShellPrefix />
+        <Flex align="center" justify="start">
+          <CMDInput>{value.replaceAll(' ', '\u00A0')}</CMDInput>
+          <CMDCursor>█</CMDCursor>
+        </Flex>
 
-          <CMDGhostInput
-            ref={inputRef}
-            onKeyDown={handleKeyPress}
-            autoFocus
-            value={value}
-            onChange={e => setValue(e.target.value)}
-            onBlur={(e: FocusEvent<HTMLInputElement>) => e.target.focus()}
-          />
-        </Flex>
-        <Flex gap="2">
-          {matches.length > 0 &&
-            matches.map((match, i) => (
-              <Binary active={i === matchCounter} className="binary">
-                {match}
-              </Binary>
-            ))}
-        </Flex>
+        <FocusTrap>
+          <div>
+            <CMDGhostInput
+              ref={inputRef}
+              onKeyDown={handleKeyPress}
+              autoFocus
+              value={value}
+              onChange={e => setValue(e.target.value)}
+              onBlur={(e: FocusEvent<HTMLInputElement>) => e.target.focus()}
+            />
+          </div>
+        </FocusTrap>
       </Flex>
-    </FocusTrap>
+      <Flex gap="2">
+        {matches.length > 0 &&
+          matches.map((match, i) => (
+            <Binary
+              key={`key-${match}`}
+              active={i === matchCounter}
+              className="binary"
+            >
+              {match}
+            </Binary>
+          ))}
+      </Flex>
+    </Flex>
   )
 }
 
