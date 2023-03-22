@@ -5,6 +5,7 @@ export enum Commands {
   CLEAR = 'clear',
   WELCOME = 'welcome',
   SOCIAL = 'social',
+  CONTACT = 'contact',
 }
 
 type CommandProperties = {
@@ -25,7 +26,7 @@ const commandList: { [key: string | Commands]: CommandProperties } = {
   [Commands.LS]: {
     command: 'ls',
     description:
-      'ls lists files and directories, and their associated metadata, such as file size, ownership, and modification time.',
+      'No real UNIX functionality, but lists useful files containing information about me :)',
     return: () => `total 5
 ${mockFiles
   .map(
@@ -52,7 +53,7 @@ ${mockFiles
   },
   [Commands.HELP]: {
     command: 'help',
-    description: 'Usage: help -  lists all commands',
+    description: 'Lists all commands',
     return: () =>
       `
     __  __________    ____ 
@@ -69,7 +70,7 @@ ${Object.entries(commandList)
   },
   [Commands.WELCOME]: {
     command: 'help',
-    description: 'Usage: help -  lists all commands',
+    description: 'Shows the initial welcome message',
     return: () =>
       `
  _       __________    __________  __  _________
@@ -85,14 +86,23 @@ based in awesome Berlin, Germany. I'm currently writing code as a Front-End Engi
 When I'm not coding, you can catch me nerding out on Vim, reading all the latest coding articles, 
 and binge-watching coding related YouTube videos.
 
-To list all available commands type "help".
+Check out what you can do by typing "help"!
     `.replaceAll(' ', '\u00A0'),
   },
   [Commands.SOCIAL]: {
     command: 'social',
-    description: 'Usage: social -  lists all my social media appearance',
-    return: () => `Social Media
-    LinkedIn: <a class='social-link' href='https://www.linkedin.com/in/louis-raetz-371614178/' target="_blank">https://www.linkedin.com/in/louis-raetz-371614178/</a>
+    description: 'Lists all my social media appearance',
+    return: () => `Social Media\n
+    LinkedIn: <a class='social-link' href='https://www.linkedin.com/in/louis-raetz-371614178/' target='_blank'>Redirect</a>
+    Twitter: <a class='social-link' href='https://twitter.com/raetzlouis' target='_blank'>Redirect</a>
+    GitHub: <a class='social-link' href='https://github.com/louisraetz' target='_blank'>Redirect</a>
+    `,
+  },
+  [Commands.CONTACT]: {
+    command: 'social',
+    description: 'Shows you how to get in touch with me.',
+    return: () => `Contact me\n
+    I am very happy to see that you want to reach out. Feel free sending and email over to <a href='mailto:louis@louisraetz.com'>louis@louisraetz.com</a>
     `,
   },
 }
