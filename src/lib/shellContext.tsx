@@ -82,7 +82,19 @@ const reducer = (state: ShellState, action: ShellActions): ShellState => {
 export const ShellProvider: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(reducer, { log: [], memory: [] })
+  const [state, dispatch] = useReducer(reducer, {
+    log: [
+      {
+        input: 'chmod +x welcome',
+        output: '',
+      },
+      {
+        input: 'welcome',
+        output: commandList[Commands.WELCOME].return(),
+      },
+    ],
+    memory: [],
+  })
 
   function dispatchUnknownCommand(cmd: string) {
     dispatch({

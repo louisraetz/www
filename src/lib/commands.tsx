@@ -3,6 +3,7 @@ export enum Commands {
   HELP = 'help',
   LS = 'ls',
   CLEAR = 'clear',
+  WELCOME = 'welcome',
 }
 
 type CommandProperties = {
@@ -59,12 +60,32 @@ ${mockFiles
  / __  / /___/ /___/ ____/ 
 /_/ /_/_____/_____/_/                           
 \n
-Version 1.0
 Available commands:\n
 ${Object.entries(commandList)
   .map(([command, cmdP]) => `${command} - ${cmdP.description}\n`)
   .join('')}
 `.replaceAll(' ', '\u00A0'),
+  },
+  [Commands.WELCOME]: {
+    command: 'help',
+    description: 'Usage: help -  lists all commands',
+    return: () =>
+      `
+ _       __________    __________  __  _________
+| |     / / ____/ /   / ____/ __ \\/  |/  / ____/
+| | /| / / __/ / /   / /   / / / / /|_/ / __/   
+| |/ |/ / /___/ /___/ /___/ /_/ / /  / / /___   
+|__/|__/_____/_____/\\____/\\____/_/  /_/_____/   
+
+Version 1.0
+
+Hey! I appreciate your visit. my name's Louis Raetz (22y/o) and I'm a self-taught Front-End Engineer 
+based in awesome Berlin, Germany. I'm currently writing code as a Front-End Engineer at Pipe. 
+When I'm not coding, you can catch me nerding out on Vim, reading all the latest coding articles, 
+and binge-watching coding related YouTube videos.
+
+To list all available commands type "help".
+    `.replaceAll(' ', '\u00A0'),
   },
 }
 

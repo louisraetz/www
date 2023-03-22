@@ -88,16 +88,19 @@ const Shell = () => {
           }px)`,
         }}
       >
-        {log.map(({ input, output }) => (
-          <>
-            {input && <ShellLn>{input}</ShellLn>}
-            <p
-              dangerouslySetInnerHTML={{
-                __html: output.replaceAll('\n', '<br />'),
-              }}
-            />
-          </>
-        ))}
+        {log.map(({ input, output }) => {
+          return (
+            <>
+              {input && <ShellLn key={input}>{input}</ShellLn>}
+              <p
+                key={output}
+                dangerouslySetInnerHTML={{
+                  __html: output.replaceAll('\n', '<br />'),
+                }}
+              />
+            </>
+          )
+        })}
         <ShellInput />
       </ShellBody>
     </ShellContainer>
