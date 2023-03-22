@@ -1,4 +1,7 @@
+import { files } from '~lib/files'
+
 export enum Commands {
+  OPEN = 'open',
   ECHO = 'echo',
   HELP = 'help',
   LS = 'ls',
@@ -14,24 +17,18 @@ type CommandProperties = {
   return: (cmd?: string) => string
 }
 
-const mockFiles = [
-  'profile.txt',
-  'achievements.txt',
-  'experience.txt',
-  'tech_stack.txt',
-  'languages.txt',
-]
-
 const commandList: { [key: string | Commands]: CommandProperties } = {
   [Commands.LS]: {
     command: 'ls',
     description:
       'No real UNIX functionality, but lists useful files containing information about me :)',
     return: () => `total 5
-${mockFiles
+${files
   .map(
-    file =>
-      `-rw-r--r--@  1 louisraetz  staff     320 21 Jan 12:13 <span class='binary'>${file}</span>\n`,
+    ({ fileName, fileExt }) =>
+      `-rw-r--r--@  1 louisraetz  staff     320 21 Jan 12:13 <span class='binary'>${
+        fileName + fileExt
+      }</span>\n`,
   )
   .join('')}
     `,
@@ -39,6 +36,11 @@ ${mockFiles
   [Commands.CLEAR]: {
     command: 'clear',
     description: 'Clears the terminal window',
+    return: () => '',
+  },
+  [Commands.OPEN]: {
+    command: 'open',
+    description: 'Opens a file you can find by running ls',
     return: () => '',
   },
   [Commands.ECHO]: {
@@ -102,7 +104,7 @@ Check out what you can do by typing "help"!
     command: 'social',
     description: 'Shows you how to get in touch with me.',
     return: () => `Contact me\n
-    I am very happy to see that you want to reach out. Feel free sending and email over to <a href='mailto:louis@louisraetz.com'>louis@louisraetz.com</a>
+    I am very happy to see that you want to reach out. Feel free to send and email over to <a href='mailto:louis@louisraetz.com'>louis@louisraetz.com</a>
     `,
   },
 }
@@ -136,7 +138,7 @@ function destructureCommand(cmd: string): {
 }
 
 const autoCompleteSuggestions = [
-  ...mockFiles,
+  ...files.map(file => file.fileName + file.fileExt),
   ...Object.entries(commandList).map(([cmd, _]) => cmd),
 ]
 
@@ -146,5 +148,4 @@ export {
   isCommand,
   destructureCommand,
   autoCompleteSuggestions,
-  mockFiles,
 }
