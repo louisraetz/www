@@ -1,10 +1,5 @@
 import React, { useContext, useReducer } from 'react'
-import {
-  commandList,
-  Commands,
-  destructureCommand,
-  isCommand,
-} from '~lib/commands'
+import { commandList, Commands, destructureCommand } from '~lib/commands'
 
 enum ShellAction {
   SEND_CMD = 'send_cmd',
@@ -96,7 +91,7 @@ export const ShellProvider: React.FC<{ children: React.ReactElement }> = ({
     memory: [],
   })
 
-  function dispatchUnknownCommand(cmd: string) {
+  function dispatchUnknownCommand(cmd: string | undefined) {
     dispatch({
       type: ShellAction.SEND_CMD,
       payload: {
@@ -116,7 +111,7 @@ export const ShellProvider: React.FC<{ children: React.ReactElement }> = ({
           dispatch({ type: ShellAction.PUSH_MEMORY, payload: command })
           if (cmd === Commands.CLEAR) {
             dispatch({ type: ShellAction.CLEAR, payload: true })
-          } else if (isCommand(cmd)) {
+          } else if (cmd) {
             dispatch({
               type: ShellAction.SEND_CMD,
               payload: {
@@ -125,7 +120,7 @@ export const ShellProvider: React.FC<{ children: React.ReactElement }> = ({
               },
             })
           } else {
-            dispatchUnknownCommand(cmd)
+            dispatchUnknownCommand(text)
           }
         },
       }}

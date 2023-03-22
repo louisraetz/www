@@ -98,17 +98,22 @@ function hasFlags(cmd: string) {
 }
 
 function destructureCommand(cmd: string): {
-  cmd: string
+  cmd: string | undefined
   flags: string[]
   text?: string
 } {
   const splittedCMD = cmd.split(' ')
+  // eslint-disable-next-line no-nested-ternary
+  const text = isCommand(splittedCMD[0])
+    ? splittedCMD.length > 1
+      ? splittedCMD[splittedCMD.length - 1]
+      : undefined
+    : splittedCMD[0]
 
   return {
-    cmd: splittedCMD[0],
+    cmd: isCommand(splittedCMD[0]) ? splittedCMD[0] : undefined,
     flags: splittedCMD.filter(str => str.includes('-')),
-    text:
-      splittedCMD.length > 1 ? splittedCMD[splittedCMD.length - 1] : undefined,
+    text,
   }
 }
 

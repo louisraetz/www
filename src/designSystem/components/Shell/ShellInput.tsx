@@ -58,6 +58,19 @@ const ShellInput = () => {
   const [matchCounter, setMatchCounter] = useState<number>(-1)
 
   useEffect(() => {
+    function evt() {
+      const el = inputRef.current
+      if (el) {
+        el.focus()
+      }
+    }
+
+    document.addEventListener('keydown', evt)
+
+    return () => document.removeEventListener('keydown', evt)
+  }, [])
+
+  useEffect(() => {
     if (value.length === 0) {
       setMatchCounter(-1)
       setMatches([])
@@ -89,7 +102,11 @@ const ShellInput = () => {
           return 0
         }
 
-        setValue(`${cmd} ${matches[p + 1]}`)
+        if (cmd) {
+          setValue(`${cmd} ${matches[p + 1]}`)
+        } else {
+          setValue(matches[p + 1])
+        }
         return p + 1
       })
     }
