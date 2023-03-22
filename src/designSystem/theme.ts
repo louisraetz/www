@@ -1,9 +1,55 @@
 import * as Stitches from '@stitches/react'
-import { colors, sizes } from '~designSystem/constants'
-import {
-  colors as linuxColors,
-  sizes as linuxSizes,
-} from '~designSystem/constants-linux'
+import colors from '~designSystem/constants'
+import linuxColors from '~designSystem/constants-linux'
+
+const sizes = {
+  '0': '0px',
+  '0_5': '2px',
+  '1': '4px',
+  '1_5': '6px',
+  '2': '8px',
+  '2_5': '10px',
+  '3': '12px',
+  '4': '16px',
+  '5': '20px',
+  '6': '24px',
+  '7': '28px',
+  '8': '32px',
+  '9': '36px',
+  '10': '40px',
+  '11': '44px',
+  '12': '48px',
+  '14': '56px',
+  '16': '64px',
+  '18': '72px',
+  '20': '80px',
+  '22': '88px',
+  '24': '96px',
+  '28': '112px',
+  '32': '128px',
+  '36': '144px',
+  '40': '160px',
+  '44': '176px',
+  '48': '192px',
+  '52': '208px',
+  '56': '224px',
+  '60': '240px',
+  '64': '256px',
+  '72': '288px',
+  '80': '320px',
+  '88': '352px',
+  '96': '384px',
+  '104': '416px',
+  '112': '448px',
+  '120': '480px',
+  '136': '544px',
+  '152': '608px',
+  '168': '672px',
+  '186': '744px',
+  '202': '808px',
+  '234': '936px',
+  '360': '1440px',
+}
 
 const {
   styled,
@@ -26,14 +72,11 @@ const {
     lg: '(max-width: 1200px)',
     xl: '(min-width: 1201px)',
   },
-  utils: {
-    // marginX: value => ({ marginLeft: value, marginRight: value }),
-  },
 })
 
 const linuxTheme = createTheme('linux', {
   colors: linuxColors,
-  sizes: linuxSizes,
+  sizes,
 })
 
 const globalStyles = globalCss({
@@ -105,4 +148,5 @@ export {
   config,
   mapTokenScaleToVariant,
   linuxTheme,
+  sizes,
 }

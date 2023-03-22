@@ -36,6 +36,11 @@ const Wrapper = styled(Flex, {
       },
     },
   },
+
+  '@md': {
+    width: '95%',
+    height: 'auto',
+  },
 })
 
 const WrapperHead = styled(Flex, {
@@ -48,8 +53,13 @@ const WrapperHead = styled(Flex, {
 
   '& > h1': {
     fontFamily: 'BIOS',
+    lineHeight: '28px',
     color: '#FFFFFF',
     textAlign: 'center',
+  },
+
+  '@md': {
+    padding: '48px 0px',
   },
 })
 

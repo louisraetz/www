@@ -103,7 +103,7 @@ const ShellHeader = forwardRef(function ShellHeaderWithRef(
       >
         louisraetz@macbook:~
       </p>
-      {_props.t === Theme.LINUX && (
+      {_props.t === Theme.LINUX ? (
         <OSControls css={{ gap: 22 }}>
           <Flex
             css={{ borderBottom: '1px solid #FFFFFF', width: 9, height: 9 }}
@@ -118,6 +118,8 @@ const ShellHeader = forwardRef(function ShellHeaderWithRef(
             }}
           />
         </OSControls>
+      ) : (
+        <div style={{ width: 48 }} />
       )}
     </ShellContainer>
   )

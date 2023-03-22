@@ -22,6 +22,12 @@ const ShellContainer = styled('div', {
   borderRadius: '10px',
 
   boxShadow: '0px 0px 14px 10px rgba(0, 0, 0, 0.25)',
+
+  '@md': {
+    width: 'calc(100% - 24px)',
+    height: 'calc(100% - 24px)',
+    margin: theme.sizes['3'],
+  },
 })
 
 const ShellBody = styled('div', {

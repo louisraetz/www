@@ -1,6 +1,5 @@
 import { styled } from '@stitches/react'
-import { mapTokenScaleToVariant } from '~designSystem/theme'
-import { sizes } from '~designSystem/constants'
+import { mapTokenScaleToVariant, sizes } from '~designSystem/theme'
 
 const Flex = styled('div', {
   display: 'flex',
