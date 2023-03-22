@@ -14,7 +14,7 @@ import Flex from '~designSystem/components/Flex'
 import { ReactComponent as ShellPrefix } from '~designSystem/svg/ShellPrefix.svg'
 import { theme } from '~designSystem/theme'
 import useShell from '~lib/shellContext'
-import { destructureCommand, mockFiles } from '~lib/commands'
+import { autoCompleteSuggestions, destructureCommand } from '~lib/commands'
 
 const CMDInput = styled('span', {
   caretColor: theme.colors.TERMINAL_BACKGROUND,
@@ -91,7 +91,7 @@ const ShellInput = () => {
       }
 
       if (text) {
-        const fuse = new Fuse(mockFiles, options)
+        const fuse = new Fuse(autoCompleteSuggestions, options)
         const possibleMatches = fuse.search(text)
         setMatches(possibleMatches.map(fs => fs.item))
       }

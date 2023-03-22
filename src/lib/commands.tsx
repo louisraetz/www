@@ -12,7 +12,7 @@ type CommandProperties = {
   return: (cmd?: string) => string
 }
 
-export const mockFiles = [
+const mockFiles = [
   'profile.txt',
   'achievements.txt',
   'experience.txt',
@@ -117,4 +117,16 @@ function destructureCommand(cmd: string): {
   }
 }
 
-export { commandList, hasFlags, isCommand, destructureCommand }
+const autoCompleteSuggestions = [
+  ...mockFiles,
+  ...Object.entries(commandList).map(([cmd, _]) => cmd),
+]
+
+export {
+  commandList,
+  hasFlags,
+  isCommand,
+  destructureCommand,
+  autoCompleteSuggestions,
+  mockFiles,
+}
