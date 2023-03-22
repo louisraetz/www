@@ -4,6 +4,7 @@ import ShellHeader from '~designSystem/components/Shell/ShellHeader'
 import ShellInput from '~designSystem/components/Shell/ShellInput'
 import useShell from '~lib/shellContext'
 import ShellLn from '~designSystem/components/Shell/ShellLn'
+import { Theme } from '~App'
 
 const ShellContainer = styled('div', {
   position: 'fixed',
@@ -45,7 +46,7 @@ const ShellBody = styled('div', {
   },
 })
 
-const Shell = () => {
+const Shell: React.FC<{ t: Theme }> = ({ t }) => {
   const { log } = useShell()
   const shellRef = useRef<HTMLDivElement | null>(null)
   const shellHeaderRef = useRef<HTMLDivElement | null>(null)
@@ -62,24 +63,9 @@ const Shell = () => {
     }
   }, [log])
 
-  /* function handleMove(e: MouseEvent<HTMLDivElement>) {
-    const el = e.target as HTMLDivElement
-
-    const initialMouseX = e.clientX - el.getBoundingClientRect().left
-    const initialMouseY = e.clientY - el.getBoundingClientRect().top
-
-    el.addEventListener('mousemove', evt => {
-      el.style.top = `${evt.clientY - initialMouseY}px`
-      el.style.left = `${evt.clientX - initialMouseX}px`
-    })
-  } */
-
   return (
-    <ShellContainer
-      ref={shellRef}
-      // onMouseDown={handleMove}
-    >
-      <ShellHeader ref={shellHeaderRef} />
+    <ShellContainer ref={shellRef}>
+      <ShellHeader ref={shellHeaderRef} t={t} />
       <ShellBody
         ref={shellBodyRef}
         css={{

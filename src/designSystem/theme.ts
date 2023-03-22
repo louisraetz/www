@@ -1,22 +1,40 @@
 import * as Stitches from '@stitches/react'
-import { colors } from '~designSystem/constants'
+import { colors, sizes } from '~designSystem/constants'
+import {
+  colors as linuxColors,
+  sizes as linuxSizes,
+} from '~designSystem/constants-linux'
 
-const { styled, css, globalCss, keyframes, getCssText, theme, config } =
-  Stitches.createStitches({
-    theme: {
-      colors,
-    },
-    media: {
-      xs: '(max-width: 480px)',
-      sm: '(max-width: 768px)',
-      md: '(max-width: 1024px)',
-      lg: '(max-width: 1200px)',
-      xl: '(min-width: 1201px)',
-    },
-    utils: {
-      // marginX: value => ({ marginLeft: value, marginRight: value }),
-    },
-  })
+const {
+  styled,
+  css,
+  globalCss,
+  keyframes,
+  getCssText,
+  theme,
+  config,
+  createTheme,
+} = Stitches.createStitches({
+  theme: {
+    colors,
+    sizes,
+  },
+  media: {
+    xs: '(max-width: 480px)',
+    sm: '(max-width: 768px)',
+    md: '(max-width: 1024px)',
+    lg: '(max-width: 1200px)',
+    xl: '(min-width: 1201px)',
+  },
+  utils: {
+    // marginX: value => ({ marginLeft: value, marginRight: value }),
+  },
+})
+
+const linuxTheme = createTheme('linux', {
+  colors: linuxColors,
+  sizes: linuxSizes,
+})
 
 const globalStyles = globalCss({
   '*': {
@@ -57,9 +75,6 @@ const globalStyles = globalCss({
     fontFeatureSettings: '"tnum", "tnum"',
     height: '100%',
 
-    backgroundImage: 'url(/images/background.jpg)',
-    backgroundSize: 'cover',
-
     '-webkit-font-smoothing': 'antialiased',
     '-moz-osx-font-smoothing': 'grayscale',
   },
@@ -89,4 +104,5 @@ export {
   theme,
   config,
   mapTokenScaleToVariant,
+  linuxTheme,
 }

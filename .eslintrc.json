@@ -55,6 +55,7 @@
     "@typescript-eslint/unbound-method": "off",
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-misused-promises": "warn",
-    "import/no-absolute-path": "off"
+    "import/no-absolute-path": "off",
+    "jsx-a11y/tabindex-no-positive": "off"
   }
 }

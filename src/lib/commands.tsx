@@ -79,7 +79,7 @@ ${Object.entries(commandList)
 
 Version 1.0
 
-Hey! I appreciate your visit. my name's Louis Raetz (22y/o) and I'm a self-taught Front-End Engineer 
+Hey! Thanks for your visit. My name is Louis Raetz I am 22 years old  and I'm a self-taught Front-End Engineer 
 based in awesome Berlin, Germany. I'm currently writing code as a Front-End Engineer at Pipe. 
 When I'm not coding, you can catch me nerding out on Vim, reading all the latest coding articles, 
 and binge-watching coding related YouTube videos.

@@ -1,5 +1,7 @@
 const colors = {
+  BACKGROUND: 'url(/images/background-macos.jpg)',
   TERMINAL_BACKGROUND: '#1F1C25',
+  TERMINAL_BACKGROUND_HEADER: 'transparent',
   TERMINAL_CLOSE: '#F25F52',
   TERMINAL_MAXIMIZE: '#F8B543',
   TERMINAL_MINIMIZE: '#4CBB4A',

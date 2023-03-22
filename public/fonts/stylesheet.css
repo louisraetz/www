@@ -89,3 +89,16 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'BIOS';
+    src: url('Web437_IBM_BIOS.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cypher';
+    src: url('Cypher-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
