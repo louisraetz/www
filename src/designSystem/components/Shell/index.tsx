@@ -11,7 +11,7 @@ import { files } from '~lib/files'
 
 const ShellContainer = styled('div', {
   width: 'calc(100% - 24px)',
-  height: 'calc(100% - 24px)',
+  height: '80%',
   margin: theme.sizes['3'],
 
   backgroundColor: theme.colors.TERMINAL_BACKGROUND,
@@ -43,6 +43,11 @@ const ShellBody = styled('div', {
   height: 'calc(100% - 16px)',
 
   margin: '8px',
+})
+
+const ShellOutput = styled('span', {
+  color: theme.colors.TERMINAL_LABEL_ACTIVE_COLOR,
+  fontSize: '12px',
 
   '.binary': {
     fontWeight: '600',
@@ -51,6 +56,14 @@ const ShellBody = styled('div', {
 
   '.social-link': {
     color: theme.colors.TERMINAL_LABEL_ACTIVE_COLOR,
+  },
+
+  '.shell-text-header': {
+    fontFamily: 'Meslo',
+    color: '#FFFFFF',
+    fontWeight: 600,
+    fontSize: '14px',
+    lineHeight: '18px',
   },
 })
 
@@ -83,24 +96,23 @@ const Shell: React.FC<{ t: Theme }> = ({ t }) => {
 
   useEffect(() => {
     if (window.screen.width < 500) {
-      alert(
+      /* alert(
         'Tackling UX correctly on an emulated shell on mobile is unfortunately ' +
           'very diffcult to do. For that reason Ive implemented helper buttons ' +
           'above the shell so you can use all commands without using the input. ' +
           'Please consider using the desktop version for a better experience',
-      )
+      ) */
     }
   }, [])
 
   const commandMap = Object.entries(commandList).map(([cmd, _]) => cmd)
   const mobileCommands = [
     commandMap[0],
-    commandMap[1],
-    commandMap[2],
+    commandMap[3],
     commandMap[4],
+    commandMap[5],
     commandMap[6],
     commandMap[7],
-    commandMap[8],
   ]
 
   return (
@@ -171,7 +183,7 @@ const Shell: React.FC<{ t: Theme }> = ({ t }) => {
             return (
               <>
                 {input && <ShellLn key={input}>{input}</ShellLn>}
-                <p
+                <ShellOutput
                   key={output}
                   dangerouslySetInnerHTML={{
                     __html: output.replaceAll('\n', '<br />'),

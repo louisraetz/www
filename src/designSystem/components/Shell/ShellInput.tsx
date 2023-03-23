@@ -136,6 +136,7 @@ const ShellInput = () => {
           ref={inputRef}
           onKeyDown={handleKeyPress}
           autoFocus
+          disabled={window.screen.width < 1024}
           value={value}
           onChange={e => setValue(e.target.value)}
         />

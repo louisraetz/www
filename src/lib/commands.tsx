@@ -1,7 +1,7 @@
 import { Files, files } from '~lib/files'
+import { ASCIIHelp, ASCIIWelcome } from '~lib/ascii'
 
 export enum Commands {
-  OPEN = 'open',
   ECHO = 'echo',
   HELP = 'help',
   LS = 'ls',
@@ -26,10 +26,8 @@ const commandList: { [key: string | Commands]: CommandProperties } = {
     return: () => `total 5
 ${files
   .map(
-    ({ fileName, fileExt }) =>
-      `-rw-r--r--@  1 louisraetz  staff     320 21 Jan 12:13 <span class='binary'>${
-        fileName + fileExt
-      }</span>\n`,
+    ({ fileName }) =>
+      `-rw-r--r--@  1 louisraetz  staff     320 21 Jan 12:13 <span class='binary'>${fileName}</span>\n`,
   )
   .join('')}
     `,
@@ -37,11 +35,6 @@ ${files
   [Commands.CLEAR]: {
     command: 'clear',
     description: 'Clears the terminal window',
-    return: () => '',
-  },
-  [Commands.OPEN]: {
-    command: 'open',
-    description: 'Opens a file you can find by running ls',
     return: () => '',
   },
   [Commands.ECHO]: {
@@ -59,38 +52,25 @@ ${files
     description: 'Lists all commands',
     return: () =>
       `
-    __  __________    ____ 
-   / / / / ____/ /   / __ \\
-  / /_/ / __/ / /   / /_/ /
- / __  / /___/ /___/ ____/ 
-/_/ /_/_____/_____/_/                           
-\n
+${ASCIIHelp}
 Available commands:\n
 ${Object.entries(commandList)
   .map(([command, cmdP]) => `${command} - ${cmdP.description}\n`)
   .join('')}
-`.replaceAll(' ', '\u00A0'),
+`,
   },
   [Commands.WELCOME]: {
     command: 'welcome',
     description: 'Shows the initial welcome message',
     return: () =>
       `
- _       __________    __________  __  _________
-| |     / / ____/ /   / ____/ __ \\/  |/  / ____/
-| | /| / / __/ / /   / /   / / / / /|_/ / __/   
-| |/ |/ / /___/ /___/ /___/ /_/ / /  / / /___   
-|__/|__/_____/_____/\\____/\\____/_/  /_/_____/   
-
+${ASCIIWelcome}
 Version 1.0
 
-Hey! Thanks for your visit. My name is Louis Raetz I am 22 years old  and I'm a self-taught Front-End Engineer 
-based in awesome Berlin, Germany. I'm currently writing code as a Front-End Engineer at Pipe. 
-When I'm not coding, you can catch me nerding out on Vim, reading all the latest coding articles, 
-and binge-watching coding related YouTube videos.
+Hey! Thanks for your visit. My name is Louis Raetz\nI am 22 years old and I'm a self taught Front End\nEngineer based in awesome Berlin, Germany. I'm currently writing code at <a class="social-link" href="https://pipe.com" target="_blank">Pipe</a>. When I'm not coding, you can catch me nerding out on Vim, reading all the latest coding articles, and binge-watching coding related YouTube videos.
 
 Check out what you can do by typing "help"!
-    `.replaceAll(' ', '\u00A0'),
+    `,
   },
   [Commands.SOCIAL]: {
     command: 'social',
@@ -146,7 +126,7 @@ function destructureCommand(cmd: string): {
 }
 
 const autoCompleteSuggestions = [
-  ...files.map(file => file.fileName + file.fileExt),
+  ...files.map(file => file.fileName),
   ...Object.entries(commandList).map(([cmd, _]) => cmd),
 ]
 
