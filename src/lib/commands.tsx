@@ -71,7 +71,7 @@ ${Object.entries(commandList)
 `.replaceAll(' ', '\u00A0'),
   },
   [Commands.WELCOME]: {
-    command: 'help',
+    command: 'welcome',
     description: 'Shows the initial welcome message',
     return: () =>
       `
@@ -101,7 +101,7 @@ Check out what you can do by typing "help"!
     `,
   },
   [Commands.CONTACT]: {
-    command: 'social',
+    command: 'contact',
     description: 'Shows you how to get in touch with me.',
     return: () => `Contact me\n
     I am very happy to see that you want to reach out. Feel free to send and email over to <a href='mailto:louis@louisraetz.com'>louis@louisraetz.com</a>

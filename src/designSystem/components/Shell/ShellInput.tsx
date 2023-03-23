@@ -25,8 +25,8 @@ const CMDCursor = styled('span', {
 
 const CMDGhostInput = styled('input', {
   position: 'fixed',
-  top: 0,
-  left: 0,
+  top: -999,
+  left: -999,
   opacity: 0,
 })
 

@@ -21,13 +21,20 @@ const Body = styled('div', {
 
   backgroundImage: t.colors.BACKGROUND,
   backgroundSize: 'cover',
+
+  '@md': {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
 const App = () => {
   /* i am too lazy rn to build a provider, its not nested any way so i just pass down
    * forgive me
    * */
-  const [theme, setTheme] = useState<Theme | undefined>(undefined)
+  const [theme, setTheme] = useState<Theme | undefined>(Theme.MAC)
   const [loading, setLoading] = useState<boolean>(true)
 
   globalStyles()

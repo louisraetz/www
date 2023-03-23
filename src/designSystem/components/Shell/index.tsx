@@ -5,14 +5,10 @@ import ShellInput from '~designSystem/components/Shell/ShellInput'
 import useShell from '~lib/shellContext'
 import ShellLn from '~designSystem/components/Shell/ShellLn'
 import { Theme } from '~App'
+import Flex from '~designSystem/components/Flex'
+import { commandList } from '~lib/commands'
 
 const ShellContainer = styled('div', {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
-
   margin: 'auto',
 
   width: '825px',
@@ -56,8 +52,17 @@ const ShellBody = styled('div', {
   },
 })
 
+const Btn = styled('button', {
+  borderRadius: '4px',
+  border: '1px solid #ffffff',
+  padding: '6px 8px',
+
+  backgroundColor: theme.colors.TERMINAL_BACKGROUND,
+  color: theme.colors.TERMINAL_LABEL_ACTIVE_COLOR,
+})
+
 const Shell: React.FC<{ t: Theme }> = ({ t }) => {
-  const { log } = useShell()
+  const { log, sendCMD } = useShell()
   const shellRef = useRef<HTMLDivElement | null>(null)
   const shellHeaderRef = useRef<HTMLDivElement | null>(null)
   const shellBodyRef = useRef<HTMLDivElement | null>(null)
@@ -73,33 +78,69 @@ const Shell: React.FC<{ t: Theme }> = ({ t }) => {
     }
   }, [log])
 
+  useEffect(() => {
+    if (window.screen.width < 500) {
+      /* alert(
+        'Tackling UX correctly on an emulated shell on mobile is unfortunately ' +
+          'very diffcult to do. For that reason Ive implemented helper buttons ' +
+          'above the shell so you can use all commands without using the input. ' +
+          'Please consider using the desktop version for a better experience',
+      ) */
+    }
+  }, [])
+
+  const commandMap = Object.entries(commandList).map(([cmd, _]) => cmd)
+
   return (
-    <ShellContainer ref={shellRef}>
-      <ShellHeader ref={shellHeaderRef} t={t} />
-      <ShellBody
-        ref={shellBodyRef}
-        css={{
-          height: `calc(100% - ${
-            (shellHeaderRef.current?.getBoundingClientRect().height || 20) + 16
-          }px)`,
-        }}
+    <>
+      <Flex
+        css={{ flexWrap: 'wrap', marginTop: 12, padding: '0px 12px' }}
+        gap="2"
+        align="center"
+        justify="center"
       >
-        {log.map(({ input, output }) => {
-          return (
-            <>
-              {input && <ShellLn key={input}>{input}</ShellLn>}
-              <p
-                key={output}
-                dangerouslySetInnerHTML={{
-                  __html: output.replaceAll('\n', '<br />'),
-                }}
-              />
-            </>
-          )
-        })}
-        <ShellInput />
-      </ShellBody>
-    </ShellContainer>
+        {[
+          commandMap[0],
+          commandMap[1],
+          commandMap[2],
+          commandMap[4],
+          commandMap[6],
+          commandMap[7],
+        ].map(cmd => (
+          <Btn type="button" key={cmd} onClick={() => sendCMD(cmd)}>
+            {cmd}
+          </Btn>
+        ))}
+      </Flex>
+
+      <ShellContainer ref={shellRef}>
+        <ShellHeader ref={shellHeaderRef} t={t} />
+        <ShellBody
+          ref={shellBodyRef}
+          css={{
+            height: `calc(100% - ${
+              (shellHeaderRef.current?.getBoundingClientRect().height || 20) +
+              16
+            }px)`,
+          }}
+        >
+          {log.map(({ input, output }) => {
+            return (
+              <>
+                {input && <ShellLn key={input}>{input}</ShellLn>}
+                <p
+                  key={output}
+                  dangerouslySetInnerHTML={{
+                    __html: output.replaceAll('\n', '<br />'),
+                  }}
+                />
+              </>
+            )
+          })}
+          <ShellInput />
+        </ShellBody>
+      </ShellContainer>
+    </>
   )
 }
 
