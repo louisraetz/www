@@ -16,25 +16,21 @@ export enum Theme {
 }
 
 const Body = styled('div', {
-  display: 'block',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
   height: '100%',
 
   backgroundImage: t.colors.BACKGROUND,
   backgroundSize: 'cover',
-
-  '@md': {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 })
 
 const App = () => {
   /* i am too lazy rn to build a provider, its not nested any way so i just pass down
    * forgive me
    * */
-  const [theme, setTheme] = useState<Theme | undefined>(Theme.MAC)
+  const [theme, setTheme] = useState<Theme | undefined>(undefined)
   const [loading, setLoading] = useState<boolean>(true)
 
   globalStyles()

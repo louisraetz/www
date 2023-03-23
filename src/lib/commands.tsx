@@ -1,4 +1,4 @@
-import { files } from '~lib/files'
+import { Files, files } from '~lib/files'
 
 export enum Commands {
   OPEN = 'open',
@@ -9,12 +9,13 @@ export enum Commands {
   WELCOME = 'welcome',
   SOCIAL = 'social',
   CONTACT = 'contact',
+  CAT = 'cat',
 }
 
 type CommandProperties = {
   command: string
   description: string
-  return: (cmd?: string) => string
+  return: (arg?: any) => string
 }
 
 const commandList: { [key: string | Commands]: CommandProperties } = {
@@ -106,6 +107,13 @@ Check out what you can do by typing "help"!
     return: () => `Contact me\n
     I am very happy to see that you want to reach out. Feel free to send and email over to <a href='mailto:louis@louisraetz.com'>louis@louisraetz.com</a>
     `,
+  },
+  [Commands.CAT]: {
+    command: 'cat',
+    description: 'Displays the files content',
+    return: (file: Files) =>
+      files.find(f => f.fileName.includes(file))?.fileContent ||
+      'file not found.',
   },
 }
 

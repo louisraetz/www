@@ -12,8 +12,8 @@ const Container = styled(Flex, {
 })
 
 const Wrapper = styled(Flex, {
-  width: '50%',
-  height: '427px',
+  width: '95%',
+  height: 'auto',
 
   border: '8px solid #FFFFFF',
 
@@ -37,8 +37,8 @@ const Wrapper = styled(Flex, {
   },
 
   '@md': {
-    width: '95%',
-    height: 'auto',
+    width: '50%',
+    height: '427px',
   },
 })
 
@@ -47,6 +47,7 @@ const WrapperHead = styled(Flex, {
   height: '68px',
   marginLeft: 'auto',
   marginRight: 'auto',
+  padding: '48px 0px',
 
   borderBottom: '4px solid #FFFFFF',
 
@@ -58,7 +59,7 @@ const WrapperHead = styled(Flex, {
   },
 
   '@md': {
-    padding: '48px 0px',
+    padding: '0px',
   },
 })
 

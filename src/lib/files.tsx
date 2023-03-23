@@ -6,7 +6,7 @@ enum Files {
 }
 
 interface IFile {
-  fileName: string
+  fileName: Files
   fileExt: string
   fileContent: string
 }
