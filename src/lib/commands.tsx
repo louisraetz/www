@@ -67,7 +67,7 @@ ${Object.entries(commandList)
 ${ASCIIWelcome}
 Version 1.0
 
-Hey! Thanks for your visit. My name is Louis Raetz\nI am 22 years old and I'm a self taught Front End\nEngineer based in awesome Berlin, Germany. I'm currently writing code at <a class="social-link" href="https://pipe.com" target="_blank">Pipe</a>. When I'm not coding, you can catch me nerding out on Vim, reading all the latest coding articles, and binge-watching coding related YouTube videos.
+Hey! my name's Louis Raetz and I'm a 22 y/o self-taught Web and Mobile Engineer based in Berlin, Germany. I'm currently writing code as a Front-End Engineer at <a class="social-link" href="https://pipe.com" target="_blank">Pipe</a>. When I'm not coding, you can catch me nerding out on Vim, and binge-watching coding related YouTube videos.
 
 Check out what you can do by typing "help"!
     `,
