@@ -96,12 +96,12 @@ const Shell: React.FC<{ t: Theme }> = ({ t }) => {
 
   useEffect(() => {
     if (window.screen.width < 500) {
-      alert(
+      /* alert(
         'Tackling UX correctly on an emulated shell on mobile is unfortunately ' +
           'very diffcult to do. For that reason Ive implemented helper buttons ' +
           'above the shell so you can use all commands without using the input. ' +
           'Please consider using the desktop version for a better experience',
-      )
+      ) */
     }
   }, [])
 

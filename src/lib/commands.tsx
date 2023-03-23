@@ -75,7 +75,7 @@ Check out what you can do by typing "help"!
   [Commands.SOCIAL]: {
     command: 'social',
     description: 'Lists all my social media appearance',
-    return: () => `Social Media\n
+    return: () => `\n\n<span class='shell-text-header'>Social Media</span>\n
     LinkedIn: <a class='social-link' href='https://www.linkedin.com/in/louis-raetz-371614178/' target='_blank'>Redirect</a>
     Twitter: <a class='social-link' href='https://twitter.com/raetzlouis' target='_blank'>Redirect</a>
     GitHub: <a class='social-link' href='https://github.com/louisraetz' target='_blank'>Redirect</a>
@@ -84,9 +84,8 @@ Check out what you can do by typing "help"!
   [Commands.CONTACT]: {
     command: 'contact',
     description: 'Shows you how to get in touch with me.',
-    return: () => `Contact me\n
-    I am very happy to see that you want to reach out. Feel free to send and email over to <a href='mailto:louis@louisraetz.com'>louis@louisraetz.com</a>
-    `,
+    return: () => `\n\n<span class='shell-text-header'>Contact me</span>\n
+    I am very happy to see that you want to reach out. Feel free to send and email over to <a href='mailto:louis@louisraetz.com'>louis@louisraetz.com</a>\n\n`,
   },
   [Commands.CAT]: {
     command: 'cat',
