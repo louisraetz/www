@@ -32,7 +32,11 @@ const ShellBody = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 
-  overflow: 'overlay',
+  overflow: 'scroll',
+
+  '@supports (overflow: overlay)': {
+    overflow: 'overlay',
+  },
 
   '&::-webkit-scrollbar': {
     display: 'none',
